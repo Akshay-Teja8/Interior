@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link as WouterLink } from "wouter";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link as ScrollLink } from "react-scroll";
 
 const navItems = [
-  { name: "Home", to: "home" },
-  { name: "About", to: "about" },
-  { name: "Services", to: "services" },
-  { name: "Why Us", to: "why-us" },
-  { name: "Contact", to: "contact" },
+  { name: "Home", to: "/" },
+  { name: "About", to: "/about" },
+  { name: "Services", to: "/services" },
+  { name: "Contact", to: "/contact" },
 ];
 
 export function Navbar() {
@@ -35,11 +33,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <ScrollLink 
-            to="home" 
-            smooth={true} 
-            className="cursor-pointer flex items-center gap-3 group"
-          >
+          <WouterLink to="/" className="flex items-center gap-3 group cursor-pointer">
             <img 
               src="/logo.jpg" 
               alt="Interiors Vision Logo" 
@@ -53,22 +47,20 @@ export function Navbar() {
                 Simplicity Beats Complexity
               </span>
             </div>
-          </ScrollLink>
+          </WouterLink>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <ScrollLink
+              <WouterLink
                 key={item.name}
                 to={item.to}
-                smooth={true}
-                offset={-80}
-                className={`cursor-pointer text-sm font-medium tracking-wide hover:text-primary transition-colors ${
+                className={`text-sm font-medium tracking-wide hover:text-primary transition-colors ${
                   scrolled ? "text-muted-foreground" : "text-white/90 hover:text-white"
                 }`}
               >
                 {item.name}
-              </ScrollLink>
+              </WouterLink>
             ))}
             <a
               href="tel:9966665438"
@@ -106,16 +98,14 @@ export function Navbar() {
           >
             <div className="px-4 pt-2 pb-6 space-y-2">
               {navItems.map((item) => (
-                <ScrollLink
+                <WouterLink
                   key={item.name}
                   to={item.to}
-                  smooth={true}
-                  offset={-80}
                   onClick={() => setIsOpen(false)}
-                  className="block px-3 py-4 text-base font-medium text-foreground hover:bg-secondary rounded-lg transition-colors cursor-pointer"
+                  className="block px-3 py-4 text-base font-medium text-foreground hover:bg-secondary rounded-lg transition-colors"
                 >
                   {item.name}
-                </ScrollLink>
+                </WouterLink>
               ))}
             </div>
           </motion.div>
