@@ -38,14 +38,21 @@ export function Navbar() {
           <ScrollLink 
             to="home" 
             smooth={true} 
-            className="cursor-pointer flex flex-col group"
+            className="cursor-pointer flex items-center gap-3 group"
           >
-            <span className={`text-2xl font-bold font-display tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-foreground md:text-white"}`}>
-              Interiors Vision
-            </span>
-            <span className={`text-xs uppercase tracking-widest transition-colors ${scrolled ? "text-primary" : "text-primary md:text-white/80"}`}>
-              Simplicity Beats Complexity
-            </span>
+            <img 
+              src="/logo.jpg" 
+              alt="Interiors Vision Logo" 
+              className="h-14 w-14 object-contain hover:scale-105 transition-transform"
+            />
+            <div className="hidden sm:flex flex-col">
+              <span className={`text-lg font-bold font-display tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-foreground md:text-white"}`}>
+                Interiors Vision
+              </span>
+              <span className={`text-xs uppercase tracking-widest transition-colors ${scrolled ? "text-primary" : "text-primary md:text-white/80"}`}>
+                Simplicity Beats Complexity
+              </span>
+            </div>
           </ScrollLink>
 
           {/* Desktop Nav */}
