@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
-import { Section, SectionHeader } from "@/components/Section";
 import { Footer } from "@/components/Footer";
 import { useCreateInquiry } from "@/hooks/use-inquiries";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertInquirySchema } from "@shared/schema";
 import type { InquiryInput } from "@shared/routes";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,206 +17,251 @@ export default function Contact() {
   
   const form = useForm<InquiryInput>({
     resolver: zodResolver(insertInquirySchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", phone: "", message: "" },
   });
 
   function onSubmit(data: InquiryInput) {
     mutation.mutate(data, {
-      onSuccess: () => {
-        form.reset();
-      },
+      onSuccess: () => form.reset(),
     });
   }
+
+  const contactMethods = [
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Phone",
+      details: ["+91 99666 65438", "+91 70366 65438"],
+      color: "text-blue-500"
+    },
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email",
+      details: ["interiorsvision21@gmail.com"],
+      color: "text-purple-500"
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Location",
+      details: ["Hyderabad, Telangana, India"],
+      color: "text-red-500"
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: "Hours",
+      details: ["Mon-Fri: 10AM-6PM", "Sat: 10AM-4PM"],
+      color: "text-amber-500"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <Navbar />
 
-      {/* Contact Hero Section */}
-      <section className="relative pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+      {/* Hero */}
+      <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-4xl md:text-6xl font-bold font-display mb-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">Get in Touch</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Ready to transform your space? Contact us for a consultation or quote.
-            </p>
-          </motion.div>
+            Get in Touch
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-muted-foreground"
+          >
+            Let's discuss your project and bring your vision to life
+          </motion.p>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <Section background="muted" className="text-foreground">
-        <div className="grid lg:grid-cols-2 gap-16">
-          <div>
-            <SectionHeader 
-              title="Contact Information" 
-              subtitle="Reach out through any of our channels"
-              center={false}
-            />
-            
-            <div className="space-y-8 mt-12">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+      {/* Contact Methods Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            {contactMethods.map((method, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex items-start gap-4"
+                transition={{ delay: index * 0.1 }}
+                className="p-6 bg-secondary/50 rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-primary" />
+                <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 ${method.color} group-hover:scale-110 transition-transform`}>
+                  {method.icon}
                 </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-1">Phone</h4>
-                  <p className="text-muted-foreground hover:text-primary transition-colors">
-                    <a href="tel:9966665438">+91 99666 65438</a>
-                  </p>
-                  <p className="text-muted-foreground hover:text-primary transition-colors">
-                    <a href="tel:7036665438">+91 70366 65438</a>
-                  </p>
+                <h3 className="font-bold text-lg mb-2">{method.title}</h3>
+                <div className="space-y-1">
+                  {method.details.map((detail, idx) => (
+                    <p key={idx} className="text-sm text-muted-foreground">
+                      {method.title === "Phone" ? (
+                        <a href={`tel:${detail.replace(/[^\d]/g, '')}`} className="hover:text-primary transition-colors">
+                          {detail}
+                        </a>
+                      ) : method.title === "Email" ? (
+                        <a href={`mailto:${detail}`} className="hover:text-primary transition-colors">
+                          {detail}
+                        </a>
+                      ) : (
+                        detail
+                      )}
+                    </p>
+                  ))}
                 </div>
               </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="flex items-start gap-4"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-1">Email</h4>
-                  <p className="text-muted-foreground hover:text-primary transition-colors">
-                    <a href="mailto:interiorsvision21@gmail.com">interiorsvision21@gmail.com</a>
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex items-start gap-4"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-1">Location</h4>
-                  <p className="text-muted-foreground">
-                    Hyderabad, Telangana, India
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+            ))}
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-background rounded-2xl p-8 shadow-lg border border-border"
-          >
-            <h3 className="text-2xl font-bold font-display mb-6">Send us a Message</h3>
-            
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your Name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          {/* Form and Info */}
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold font-display mb-4">Why Contact Us?</h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Whether you have a quick question or a detailed project in mind, our team is here to help. We pride ourselves on quick response times and personalized attention.
+                </p>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                {[
+                  "Free consultation for new projects",
+                  "Expert design recommendations",
+                  "Budget-friendly solutions",
+                  "Transparent pricing and timeline"
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="flex items-center gap-3"
+                  >
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-foreground">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-secondary/50 rounded-2xl p-8 border border-border"
+            >
+              <h2 className="text-2xl font-bold font-display mb-6">Send us a Message</h2>
+              
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
-                    name="phone"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Phone</FormLabel>
+                        <FormLabel className="text-foreground">Full Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Phone Number" {...field} />
+                          <Input 
+                            placeholder="John Doe" 
+                            {...field} 
+                            className="bg-background/50 border-border"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-foreground">Phone</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="9876543210" 
+                              {...field}
+                              className="bg-background/50 border-border"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-foreground">Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="john@example.com" 
+                              {...field}
+                              className="bg-background/50 border-border"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-foreground">Tell us about your project</FormLabel>
                         <FormControl>
-                          <Input placeholder="Email Address" {...field} />
+                          <Textarea 
+                            placeholder="Describe your interior design needs, budget, and timeline..." 
+                            className="min-h-[140px] resize-none bg-background/50 border-border"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </div>
 
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Tell us about your project requirements..." 
-                          className="min-h-[120px] resize-none" 
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button 
-                  type="submit" 
-                  disabled={mutation.isPending}
-                  className="w-full h-12 text-lg font-medium"
-                >
-                  {mutation.isPending ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
-            </Form>
-          </motion.div>
+                  <Button 
+                    type="submit" 
+                    disabled={mutation.isPending}
+                    size="lg"
+                    className="w-full gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    {mutation.isPending ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              </Form>
+            </motion.div>
+          </div>
         </div>
-      </Section>
+      </section>
 
       <Footer />
 
-      {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/919966665438"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">

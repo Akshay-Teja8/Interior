@@ -3,55 +3,182 @@ import { Link as WouterLink } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
+import { ArrowRight, Home as HomeIcon, Lightbulb, Hammer } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <Navbar />
 
-      {/* Hero Section */}
-      <section id="home" className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2000&auto=format&fit=crop"
-            alt="Interior Design Hero"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      {/* Hero Section - Minimalist Design */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center min-h-[600px]">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="inline-block mb-4"
+                >
+                  <span className="text-sm font-semibold uppercase tracking-wider text-primary">Welcome to Excellence</span>
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold font-display mb-6 leading-tight"
+                >
+                  Transform Your Space
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-lg text-muted-foreground mb-2"
+                >
+                  Interiors Vision
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-primary font-semibold italic text-lg"
+                >
+                  "Simplicity beats complexity"
+                </motion.p>
+              </div>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold font-display mb-6 tracking-tight"
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg"
+              >
+                Creating beautiful, functional spaces that reflect your personality. From concept to completion, we bring your vision to life with expertise and passion.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <WouterLink to="/contact">
+                  <Button size="lg" className="w-full sm:w-auto flex items-center gap-2">
+                    Get Started <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </WouterLink>
+                <WouterLink to="/services">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                    Explore Services
+                  </Button>
+                </WouterLink>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Image with Floating Elements */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative hidden md:block"
+            >
+              <div className="relative">
+                <div className="absolute -inset-8 bg-gradient-to-br from-primary/10 to-primary/5 rounded-3xl blur-2xl" />
+                <img
+                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=600&auto=format&fit=crop"
+                  alt="Modern Interior Design"
+                  className="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover"
+                />
+              </div>
+              
+              {/* Floating Cards */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute -bottom-8 -left-8 bg-white dark:bg-secondary rounded-lg p-4 shadow-lg border border-border"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Lightbulb className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">Design</p>
+                    <p className="text-xs text-muted-foreground">Custom Solutions</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 4, delay: 0.5, repeat: Infinity }}
+                className="absolute -top-8 -right-8 bg-white dark:bg-secondary rounded-lg p-4 shadow-lg border border-border"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Hammer className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">Execution</p>
+                    <p className="text-xs text-muted-foreground">Expert Craftsmanship</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="bg-secondary/50 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { number: "500+", label: "Projects Completed" },
+              { number: "10+", label: "Years Experience" },
+              { number: "99%", label: "Client Satisfaction" },
+              { number: "24/7", label: "Support Available" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <p className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.number}</p>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            Interiors Vision
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl md:text-2xl font-light tracking-wide mb-10 max-w-2xl mx-auto text-white/90"
-          >
-            "Simplicity beats complexity"
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
+              Ready to Create Magic?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Let's discuss your project and bring your dream space to reality.
+            </p>
             <WouterLink to="/contact">
-              <Button size="lg" className="rounded-full px-8 py-6 text-lg bg-primary hover:bg-primary/90 text-primary-foreground">
-                Get a Quote
-              </Button>
-            </WouterLink>
-            <WouterLink to="/services">
-              <Button variant="outline" size="lg" className="rounded-full px-8 py-6 text-lg bg-white/10 border-white/40 text-white hover:bg-white hover:text-foreground backdrop-blur-sm">
-                Our Services
+              <Button size="lg" className="gap-2">
+                Schedule Consultation <ArrowRight className="w-4 h-4" />
               </Button>
             </WouterLink>
           </motion.div>
@@ -60,7 +187,7 @@ export default function Home() {
 
       <Footer />
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Button */}
       <a
         href="https://wa.me/919966665438"
         target="_blank"

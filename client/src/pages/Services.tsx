@@ -1,106 +1,177 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
-import { Section, SectionHeader } from "@/components/Section";
-import { ServiceCard } from "@/components/ServiceCard";
 import { Footer } from "@/components/Footer";
+import { Check } from "lucide-react";
 
 export default function Services() {
   const services = [
     {
+      id: 1,
       title: "Interior Designing",
-      description: "Complete interior solutions that blend aesthetics with functionality. We transform spaces into living works of art.",
-      imageUrl: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop"
+      tagline: "Complete Space Transformation",
+      description: "Complete interior solutions that blend aesthetics with functionality.",
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop",
+      features: ["Space Planning", "Color Consultation", "Furniture Selection", "3D Visualization"]
     },
     {
+      id: 2,
       title: "Modular Kitchen",
-      description: "Ergonomic and stylish modular kitchens designed for the modern chef. Maximize space with smart storage solutions.",
-      imageUrl: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop"
+      tagline: "Smart & Stylish",
+      description: "Ergonomic and stylish modular kitchens designed for the modern lifestyle.",
+      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop",
+      features: ["Custom Storage", "Smart Appliances", "Workflow Optimization", "Material Selection"]
     },
     {
+      id: 3,
       title: "Wood Works",
-      description: "Custom carpentry and woodwork that adds warmth and character. From intricate carvings to modern minimalist furniture.",
-      imageUrl: "https://images.unsplash.com/photo-1601058268499-e52642d18d89?q=80&w=1000&auto=format&fit=crop"
+      tagline: "Craftsmanship Excellence",
+      description: "Custom carpentry and woodwork that adds warmth and character.",
+      image: "https://images.unsplash.com/photo-1601058268499-e52642d18d89?q=80&w=600&auto=format&fit=crop",
+      features: ["Custom Carpentry", "Wood Selection", "Finishes & Polish", "Installation"]
     },
     {
+      id: 4,
       title: "Wardrobes",
-      description: "Spacious and elegant wardrobe designs tailored to your storage needs. Sliding, walk-in, and hinged options available.",
-      imageUrl: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=1000&auto=format&fit=crop"
+      tagline: "Storage Solutions",
+      description: "Spacious and elegant wardrobe designs tailored to your storage needs.",
+      image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=600&auto=format&fit=crop",
+      features: ["Space Maximization", "Sliding Doors", "Internal Organization", "Premium Hardware"]
     },
     {
+      id: 5,
       title: "Electrical Works",
-      description: "Safe and strategic electrical planning and installation. Lighting design that sets the perfect mood for every room.",
-      imageUrl: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=1000&auto=format&fit=crop"
-    },
+      tagline: "Intelligent Lighting",
+      description: "Safe and strategic electrical planning with exceptional lighting design.",
+      image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=600&auto=format&fit=crop",
+      features: ["Lighting Design", "Smart Wiring", "Safety Compliance", "Modern Fixtures"]
+    }
   ];
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <Navbar />
 
-      {/* Services Hero Section */}
-      <section className="relative pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+      {/* Hero */}
+      <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-4xl md:text-6xl font-bold font-display mb-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">Our Services</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              From concept to completion, we offer comprehensive interior solutions tailored to your lifestyle.
-            </p>
-          </motion.div>
+            Our Services
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-muted-foreground"
+          >
+            Comprehensive interior solutions for every space and style
+          </motion.p>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <Section>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Services Grid - Alternating Layout */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-20">
           {services.map((service, index) => (
-            <ServiceCard key={index} {...service} index={index} />
-          ))}
-        </div>
-      </Section>
-
-      {/* Service Process Section */}
-      <Section background="muted">
-        <SectionHeader 
-          title="Our Process"
-          subtitle="A structured approach to bringing your vision to life"
-        />
-        
-        <div className="grid md:grid-cols-4 gap-8">
-          {[
-            { step: "01", title: "Consultation", description: "We listen to your ideas, budget, and timeline." },
-            { step: "02", title: "Concept Design", description: "Our team creates detailed designs and 3D visualizations." },
-            { step: "03", title: "Execution", description: "Expert craftsmen bring the design to life with precision." },
-            { step: "04", title: "Completion", description: "Final touches and your complete satisfaction guarantee." }
-          ].map((item, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={service.id}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative"
+              transition={{ duration: 0.6 }}
+              className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
             >
-              <div className="text-6xl font-bold text-primary/20 font-display mb-4">{item.step}</div>
-              <h3 className="text-xl font-bold mb-3 font-display">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
+              <div className={index % 2 === 1 ? "md:order-2" : ""}>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="rounded-2xl w-full h-[350px] object-cover shadow-lg"
+                />
+              </div>
+              
+              <div className={index % 2 === 1 ? "md:order-1" : ""}>
+                <motion.div
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="space-y-6"
+                >
+                  <div>
+                    <p className="text-sm font-semibold text-primary mb-2 uppercase tracking-wider">{service.tagline}</p>
+                    <h2 className="text-3xl md:text-4xl font-bold font-display mb-3">{service.title}</h2>
+                    <p className="text-muted-foreground text-lg">{service.description}</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <p className="font-semibold text-sm uppercase text-muted-foreground">What's Included:</p>
+                    {service.features.map((feature, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 + idx * 0.1 }}
+                        className="flex items-center gap-3"
+                      >
+                        <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                        <span className="text-foreground">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
-      </Section>
+      </section>
+
+      {/* Process */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold font-display text-center mb-16"
+          >
+            Our Process
+          </motion.h2>
+          
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { step: "01", title: "Consultation", desc: "Understanding your vision, budget, and timeline" },
+              { step: "02", title: "Design", desc: "Creating detailed designs and 3D visualizations" },
+              { step: "03", title: "Execution", desc: "Expert craftsmen bringing designs to life" },
+              { step: "04", title: "Handover", desc: "Perfect finishing touches and your satisfaction" }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-5xl font-bold text-primary/20 font-display mb-4">{item.step}</div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
 
-      {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/919966665438"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">

@@ -1,174 +1,175 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
-import { Section, SectionHeader } from "@/components/Section";
 import { Footer } from "@/components/Footer";
-import { Award, CheckCircle2, Clock, Smile } from "lucide-react";
+import { Award, Users, Target, Zap } from "lucide-react";
 
 export default function About() {
-  const features = [
+  const values = [
     {
-      icon: <Award className="w-8 h-8" />,
-      title: "Experienced Team",
-      description: "Skilled craftsmen and designers with years of expertise."
+      icon: <Award className="w-6 h-6" />,
+      title: "Excellence",
+      description: "We strive for perfection in every detail, every design, every project."
     },
     {
-      icon: <CheckCircle2 className="w-8 h-8" />,
-      title: "Quality Materials",
-      description: "We source only the finest materials for lasting durability."
+      icon: <Users className="w-6 h-6" />,
+      title: "Collaboration",
+      description: "Your ideas matter. We listen, understand, and co-create your vision."
     },
     {
-      icon: <Clock className="w-8 h-8" />,
-      title: "On-Time Delivery",
-      description: "We value your time and commit to strict project timelines."
+      icon: <Target className="w-6 h-6" />,
+      title: "Precision",
+      description: "Meticulous planning and execution ensure exceptional results."
     },
     {
-      icon: <Smile className="w-8 h-8" />,
-      title: "Customer Satisfaction",
-      description: "Your vision is our priority. We work until you are delighted."
-    },
+      icon: <Zap className="w-6 h-6" />,
+      title: "Innovation",
+      description: "Staying ahead with trends while maintaining timeless appeal."
+    }
+  ];
+
+  const timeline = [
+    { year: "2014", title: "Founded", desc: "Started with a vision to simplify interior design" },
+    { year: "2016", title: "Growth", desc: "Expanded team with award-winning designers" },
+    { year: "2019", title: "Recognition", desc: "Won 'Best Interior Design Studio' award" },
+    { year: "2024", title: "Excellence", desc: "500+ satisfied customers, counting..." }
   ];
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <Navbar />
 
-      {/* About Hero Section */}
-      <section className="relative pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+      {/* Hero */}
+      <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-4xl md:text-6xl font-bold font-display mb-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">About Us</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Transforming spaces, creating experiences, building dreams.
-            </p>
-          </motion.div>
+            About Interiors Vision
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-muted-foreground"
+          >
+            A decade of passion, creativity, and transformation
+          </motion.p>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <Section id="philosophy" className="relative">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <SectionHeader 
-              title="Our Philosophy" 
-              subtitle="We believe that great design should be invisible. It should feel natural, comfortable, and effortlessly beautiful."
-              center={false}
-            />
-            <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
-              <p>
-                At Interiors Vision, we don't just fill rooms with furniture; we create atmospheres. Our mission is to translate your personality into a tangible living space.
-              </p>
-              <p>
-                Guided by our motto <span className="text-primary font-medium italic">"Simplicity beats complexity"</span>, we strip away the unnecessary to reveal the essence of your home. Whether it's a cozy bedroom or a bustling kitchen, we focus on clean lines, thoughtful layouts, and premium materials.
-              </p>
-              <p>
-                Each project is a collaboration. We listen, we understand, and we deliver spaces that exceed your expectations.
-              </p>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-secondary rounded-2xl -z-10 transform rotate-2" />
-            <img 
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop" 
-              alt="Design Philosophy" 
-              className="rounded-xl shadow-xl w-full object-cover h-[500px]"
-            />
-          </motion.div>
-        </div>
-      </Section>
-
-      {/* Why Choose Us Section */}
-      <Section id="why-us" background="muted">
-        <SectionHeader 
-          title="Why Choose Interiors Vision" 
-          subtitle="We bring professionalism, creativity, and reliability to every project we undertake."
-        />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      {/* Philosophy */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.img
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center p-6 rounded-2xl hover:bg-secondary/50 transition-colors"
-            >
-              <div className="w-16 h-16 mx-auto bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3 font-display">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Our Story Section */}
-      <Section>
-        <SectionHeader 
-          title="Our Journey"
-          subtitle="From passion to profession"
-        />
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-secondary rounded-2xl -z-10 transform -rotate-2" />
-            <img 
-              src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1000&auto=format&fit=crop" 
-              alt="Our Team" 
-              className="rounded-xl shadow-xl w-full object-cover h-[400px]"
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=600&auto=format&fit=crop"
+              alt="Design Philosophy"
+              className="rounded-2xl w-full h-[400px] object-cover shadow-lg"
             />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6 text-muted-foreground text-lg leading-relaxed"
-          >
-            <p>
-              Interiors Vision began with a simple idea: beautiful interiors shouldn't be complicated. Founded by a team of passionate designers and craftsmen, we've been transforming spaces across Hyderabad.
-            </p>
-            <p>
-              Over the years, we've completed hundreds of projects, each one a testament to our commitment to excellence. From residential apartments to commercial spaces, our work speaks for itself.
-            </p>
-            <p>
-              Today, we continue to innovate, collaborate, and create spaces that inspire. Every project reinforces our belief that simplicity truly beats complexity.
-            </p>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">Our Philosophy</h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  At Interiors Vision, we believe that exceptional design isn't about complexity—it's about clarity. Every space tells a story, and we're here to help yours shine.
+                </p>
+              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Our motto, <span className="text-primary font-semibold italic">"Simplicity beats complexity,"</span> guides every decision. We strip away the unnecessary, celebrate the essential, and create spaces that feel authentic.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Whether it's a cozy corner or a complete transformation, we approach each project with the same dedication: understanding your needs, respecting your budget, and delivering excellence.
+              </p>
+            </motion.div>
+          </div>
         </div>
-      </Section>
+      </section>
+
+      {/* Values Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold font-display text-center mb-16"
+          >
+            Core Values
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 bg-background rounded-xl border border-border hover:border-primary/50 transition-colors"
+              >
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{value.title}</h3>
+                <p className="text-muted-foreground">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold font-display text-center mb-16"
+          >
+            Our Journey
+          </motion.h2>
+          <div className="space-y-8">
+            {timeline.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex gap-6"
+              >
+                <div className="flex flex-col items-center">
+                  <div className="w-4 h-4 rounded-full bg-primary mt-1" />
+                  {index < timeline.length - 1 && <div className="w-1 h-20 bg-primary/20 my-2" />}
+                </div>
+                <div className="pb-8">
+                  <p className="text-sm font-semibold text-primary mb-1">{item.year}</p>
+                  <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
 
-      {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/919966665438"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current">
