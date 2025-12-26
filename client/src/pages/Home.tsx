@@ -369,17 +369,24 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-background border-t border-border py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold font-display mb-2">Interiors Vision</h2>
-          <p className="text-primary italic mb-6">"Simplicity beats complexity"</p>
-          <div className="flex justify-center space-x-6 mb-8 text-muted-foreground">
-            <ScrollLink to="home" smooth={true} className="cursor-pointer hover:text-primary">Home</ScrollLink>
-            <ScrollLink to="about" smooth={true} className="cursor-pointer hover:text-primary">About</ScrollLink>
-            <ScrollLink to="services" smooth={true} className="cursor-pointer hover:text-primary">Services</ScrollLink>
-            <ScrollLink to="contact" smooth={true} className="cursor-pointer hover:text-primary">Contact</ScrollLink>
-          </div>
-          <div className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Interiors Vision. All rights reserved.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center">
+            <img 
+              src="/logo.jpg" 
+              alt="Interiors Vision Logo" 
+              className="h-16 w-16 object-contain mb-6 hover:scale-105 transition-transform"
+            />
+            <h2 className="text-2xl font-bold font-display mb-2">Interiors Vision</h2>
+            <p className="text-primary italic mb-6">"Simplicity beats complexity"</p>
+            <div className="flex justify-center space-x-6 mb-8 text-muted-foreground">
+              <ScrollLink to="home" smooth={true} className="cursor-pointer hover:text-primary">Home</ScrollLink>
+              <ScrollLink to="about" smooth={true} className="cursor-pointer hover:text-primary">About</ScrollLink>
+              <ScrollLink to="services" smooth={true} className="cursor-pointer hover:text-primary">Services</ScrollLink>
+              <ScrollLink to="contact" smooth={true} className="cursor-pointer hover:text-primary">Contact</ScrollLink>
+            </div>
+            <div className="text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} Interiors Vision. All rights reserved.
+            </div>
           </div>
         </div>
       </footer>
